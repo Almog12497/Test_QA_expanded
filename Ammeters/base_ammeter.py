@@ -16,6 +16,7 @@ class AmmeterEmulatorBase(ABC):
         The server will run indefinitely, handling one client request at a time.
         """
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             s.bind(('localhost', self.port))
             s.listen()
             print(f"{self.__class__.__name__} is running on port {self.port}")
@@ -25,9 +26,11 @@ class AmmeterEmulatorBase(ABC):
                     print(f"Connected by {addr}")
                     data = conn.recv(1024)
                     if data == self.get_current_command:
-                        # Call the specific measure_current() method defined in subclasses
-                        current = self.measure_current()
-                        conn.sendall(str(current).encode('utf-8'))
+                        try:
+                            current = self.measure_current()
+                            conn.sendall(str(current).encode('utf-8'))
+                        except Exception as e:
+                            print(f"{self.__class__.__name__} measurement error: {e}")
 
     @property
     @abstractmethod

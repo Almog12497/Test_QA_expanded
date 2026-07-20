@@ -1,13 +1,18 @@
 from socket import socket, AF_INET, SOCK_STREAM
+from typing import Optional
 
 
-def request_current_from_ammeter(port: int, command: bytes):
+SOCKET_TIMEOUT_SECONDS = 5
+
+def request_current_from_ammeter(port: int, command: bytes) -> Optional[float]:
     with socket(AF_INET, SOCK_STREAM) as s:
+        s.settimeout(SOCKET_TIMEOUT_SECONDS)
         s.connect(('localhost', port))
         s.sendall(command)
         data = s.recv(1024)
         if data:
-            print(f"Received current measurement from port {port}: {data.decode('utf-8')} A")
-        else:
-            print("No data received.")
+            value = float(data.decode('utf-8'))
+            print(f"Received current measurement from port {port}: {value:.3f} A")
+            return value
+        return None
 
