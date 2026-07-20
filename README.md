@@ -19,7 +19,16 @@ A testing framework for current measurement systems using three ammeter emulator
 │   └── testing/
 │       ├── test_framework.py        # AmmeterTestFramework — core testing class
 │       └── error_simulation.py      # ErrorSimulator — failure scenario test suite
-└── results/                         # Auto-created — stores JSON results and PNG plots
+├── tests/
+│   ├── test_statistics.py           # Unit tests: _compute_stats
+│   ├── test_config.py               # Unit tests: config loading and ammeter config
+│   ├── test_result_management.py    # Unit tests: archive, load, list, compare
+│   ├── test_accuracy.py             # Unit tests: accuracy assessment and CV ranking
+│   └── test_sampling.py             # Unit tests: wrong-port / connection failure behaviour
+├── examples/
+│   └── run_tests.py                 # Standalone usage example
+├── conftest.py                      # Pytest path setup
+└── results/                         # JSON results and PNG plots (see note below)
 ```
 
 ## Setup
@@ -127,6 +136,30 @@ from src.testing.error_simulation import ErrorSimulator
 
 ErrorSimulator().run_all()
 ```
+
+## Unit Tests
+
+35 pytest tests cover statistics computation, configuration loading, result archiving/retrieval, accuracy assessment, and sampling behaviour. All tests use mocks for network calls and isolated temporary directories for file I/O, so they never open real sockets or touch the real `results/` folder.
+
+```sh
+# Run all tests
+python -m pytest tests/ -v
+
+# Run with coverage report
+python -m pytest tests/ --cov=src --cov-report=term-missing
+```
+
+| File | Tests | What it covers |
+|------|-------|----------------|
+| `tests/test_statistics.py` | 5 | `_compute_stats` — basic, single sample, empty input, identical values, known std dev |
+| `tests/test_config.py` | 7 | Config loading, missing file error, all three ammeter ports via `@pytest.mark.parametrize`, unknown type `ValueError` |
+| `tests/test_result_management.py` | 11 | Archive filename/content, load by short prefix, corrupted JSON errors, list with type filter, compare table output |
+| `tests/test_accuracy.py` | 5 | CV ranking order, correct CV values, sorted assertion, no-results guard, corrupted file skipped |
+| `tests/test_sampling.py` | 7 | Mocked client: samples collected, connection refused (empty result, no archive, empty stats), partial failures, unique run IDs per test |
+
+## Results Folder
+
+The `results/` folder is committed to this repository for demonstration purposes so that example output (JSON result files and PNG plots) can be reviewed without running the framework first. In a production setup this folder would typically be added to `.gitignore` since results are generated locally on each run.
 
 ## Result Files
 

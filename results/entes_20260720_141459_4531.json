@@ -1,0 +1,30 @@
+{
+  "run_id": "453186e8-1bfc-44ae-b432-79c74820bde1",
+  "ammeter_type": "entes",
+  "started_at": "2026-07-20T14:14:59.704567",
+  "completed_at": "2026-07-20T14:15:08.747227",
+  "config": {
+    "measurements_count": 10,
+    "sampling_frequency_hz": 1.0
+  },
+  "samples": [
+    93.805,
+    83.168,
+    48.857,
+    62.803,
+    16.02,
+    24.02,
+    105.803,
+    72.551,
+    177.515,
+    45.203
+  ],
+  "statistics": {
+    "mean": 72.975,
+    "median": 67.677,
+    "std_dev": 46.715,
+    "min": 16.02,
+    "max": 177.515,
+    "count": 10
+  }
+}

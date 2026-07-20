@@ -1,0 +1,32 @@
+{
+  "run_id": "6e6722cc-a827-4dfb-8c73-d518951883ce",
+  "ammeter_type": "circutor",
+  "started_at": "2026-07-20T12:49:35.684816",
+  "completed_at": "2026-07-20T12:49:44.694419",
+  "config": {
+    "measurements_count": 10,
+    "sampling_frequency_hz": 1.0
+  },
+  "samples": [
+    0.054,
+    0.009,
+    0.011,
+    0.053,
+    0.05,
+    0.024,
+    0.055,
+    0.042,
+    0.041,
+    0.031
+  ],
+  "statistics": {
+    "mean": 0.037,
+    "median": 0.042,
+    "std_dev": 0.018,
+    "min": 0.009,
+    "max": 0.055,
+    "count": 10,
+    "coefficient_of_variation_pct": 47.505,
+    "consistency": "Low"
+  }
+}

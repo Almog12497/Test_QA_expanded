@@ -8,20 +8,13 @@ class TestLogger:
         self.logger = self._setup_logger()
 
     def _setup_logger(self) -> logging.Logger:
-        """
-        הגדרת הלוגר עם פורמט מותאם וכתיבה לקובץ
-        """
-        # יצירת תיקיית הלוגים
         log_dir = "results/logs"
         os.makedirs(log_dir, exist_ok=True)
 
-        # הגדרת שם הקובץ עם תאריך ומזהה הבדיקה
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         log_file = f"{log_dir}/{timestamp}_{self._test_name}.log"
 
-        # הגדרת הלוגר
         logger = logging.getLogger(f"test_{self._test_name}")
-
 
         return logger
 
@@ -35,4 +28,4 @@ class TestLogger:
         self.logger.debug(message)
 
     def warning(self, message: str):
-        self.logger.warning(message) 
+        self.logger.warning(message)

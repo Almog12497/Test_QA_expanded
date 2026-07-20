@@ -1,0 +1,32 @@
+{
+  "run_id": "c1bc35aa-9d89-418d-834b-4bdc2abda222",
+  "ammeter_type": "greenlee",
+  "started_at": "2026-07-20T12:48:39.439848",
+  "completed_at": "2026-07-20T12:48:48.448499",
+  "config": {
+    "measurements_count": 10,
+    "sampling_frequency_hz": 1.0
+  },
+  "samples": [
+    1.287,
+    0.162,
+    0.033,
+    0.103,
+    0.075,
+    0.453,
+    0.08,
+    0.318,
+    0.447,
+    0.138
+  ],
+  "statistics": {
+    "mean": 0.31,
+    "median": 0.15,
+    "std_dev": 0.376,
+    "min": 0.033,
+    "max": 1.287,
+    "count": 10,
+    "coefficient_of_variation_pct": 121.436,
+    "consistency": "Low"
+  }
+}
